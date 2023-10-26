@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="css/styles.css">
+        <title>
+            Тест ImageSlider'а
+        </title>
+        <script>
+            class ImageManager{
+                constructor(imageURLs){
+                    this.imageURLs = imageURLs
+                    this.currImageIndex = 0
+                    this.refresh()
+                }
+
+                refresh(){
+                    const imgSlideElem = document.getElementById("imgSlide")
+                    imgSlideElem.setAttribute("src", this.imageURLs[this.currImageIndex])
+                }
+
+                next(){
+                    if (this.currImageIndex == this.imageURLs.length-1){
+                        this.currImageIndex = 0
+                    }else{
+                        this.currImageIndex++
+                    }
+
+                    this.refresh()
+                }
+
+                prev(){
+                    // console.log(this)
+                    if (this.currImageIndex == 0){
+                        this.currImageIndex = this.imageURLs.length - 1
+                    }else{
+                        this.currImageIndex--
+                    }
+
+                    this.refresh()
+                }
+            }
+
+            function createImageManager(){
+                const resImageManager = new ImageManager([
+                    "images/CatMemes_1.jpg",
+                    "images/CatMemes_2.jpg",
+                    "images/CatMemes_3.jpg",
+                    "images/CatMemes_4.jpg",
+                    "images/CatMemes_5.jpg",
+                    "images/CatMemes_6.jpg",
+                    "images/CatMemes_7.jpg",
+                    "images/CatMemes_8.jpg",
+                    "images/CatMemes_9.jpg",
+                    "images/CatMemes_10.jpg",
+                    "images/CatMemes_11.jpg",
+                ])
+
+                return resImageManager
+            }
+
+            let imageManager = null
+        </script>
+    </head>
+    <body onload = "imageManager = createImageManager()">
+        <header>
+            <button id="btnPrev" onclick="imageManager.prev()">Предыдущий</button>
+            <button id="btnNext" onclick="imageManager.next()">Следущий</button>
+        </header>
+        <img id="imgSlide" src="" width="400" height="400">
+    </body> 
+</html>
